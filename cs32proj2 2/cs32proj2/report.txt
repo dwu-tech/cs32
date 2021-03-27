@@ -1,0 +1,265 @@
+﻿1) Doubly Linked List implementation
+        
+Each sequence also has head and tail pointers to allow you to traverse in reverse or normal order. There is also a size variable for the size function. Each Node contains a value, a previous pointer to a node , and a next pointer to a node. The list is linear, you can only go backwards and forwards. An empty sequence is just a head and tail pointer that are pointed to nullptr;
+
+
+2) Pseudocode 
+
+
+Remove Uses both find and erase functions, pseudocode for those functions will be under remove pseudocode
+
+
+int Sequence::remove(const ItemType &value){
+    
+      Iterate through the sequence    
+Erase values that match sequence   
+Increment counting variable
+  
+Return count variable
+}
+
+
+int Sequence::find(const ItemType &value) const{
+    int count = 0;
+  for Loop, traverse list and increment count
+        Return the count(position) if there is a match
+    }
+   Return -1 for no matches
+}
+
+
+bool Sequence::erase(int pos){   
+    
+    Return false if invalid position
+    
+   If you want to erase beginning
+       
+                If only item in sequence
+                        Save temp address
+                                   delete only item, update size, both head and tail
+                        Return true
+             
+                          else
+                                   Save temp address
+                            Delete the head, update head, size, return true
+  
+            
+            
+    
+    
+    If you want to erase the end node
+        Save temp address
+Delete the tail, update the tail and size, return true
+       
+    
+   (For erasing in the middle)
+   
+    
+    Traverse through until you hit the desired pos to remove
+    
+                Save node before deleting
+                    Update the new neighbors so they connect over the soon to be deleted node                        delete temporary
+                       Update size,return true
+   
+}
+
+
+void interleave(const Sequence& seq1, const Sequence& seq2, Sequence& result){
+    
+Initialize temp Sequence and count variables
+    
+   If either sequence is empty
+        Result is set to the other sequence
+    
+
+
+    int seqCount = 0;
+    Iterate through the sequence until smaller size runs out)
+        Declare two item types
+        Use get function to get value
+       Alternate inserting between first and second  sequences
+Update count variables   
+       
+    }
+    if(seq1 size is larger than seq2)   
+Use get function to set temp to proper value         
+        Loop through the rest of the larger sequence
+                Insert the rest of the larger sequence into temporary sequence
+                Update counting variables
+    
+
+
+   if(seq 2 size is larger than seq1)
+        Use get function to set temp to proper value         
+        Loop through the rest of the larger sequence
+                Insert the rest of the larger sequence into temporary sequence
+                Update counting variables
+
+
+    
+Set result to the temp variable
+   
+    
+
+
+int Sequence::insert(int pos, const ItemType& value){  //insert into specific index function
+    
+    check if valid index
+     
+
+
+    if empty
+        
+        construct new node
+      
+        Set tail and head to only element
+        Update size
+
+
+    
+
+
+    If insert at beginning
+        Set a temp node to head
+        
+        reroute second element  to first
+        set head to top
+        
+       Update size;
+        Return spot inserted
+    }
+   
+    If inserting at end
+        Construct new Node
+        
+       tail becomes second last, points to node p
+       move tail to the end
+        Update size,return position
+    }
+   
+    Otherwise you insert into the middle
+        
+        Iterate through sequence with temp variable
+    
+                New node prev point to current previous, next points to temp variable
+        
+                prev node next points to the new node
+               old current prev points to new
+              Update size, return position
+3. Test Cases
+
+
+assert(s.size() == 0);             // test size
+assert(s.empty());                 // test empty
+assert(s.remove("paratha") == 0);  // nothing to remove
+
+
+assert(s.insert(0, "s") == 0);  //insert at beginning when empty
+    assert(s.insert(0, "y")==0);  //beginning insert when item is there
+    
+    assert(s.insert(2,"4")==2);  //insert at end when nodes in sequence is there
+    assert(s.insert(3,"5")==3);  //insert at end when nodes in sequence is there
+    
+    assert(s.insert(1,"33")==1);  //insert in middle
+    assert(s.insert(4,"233") == 4);  //insert in second last
+    
+    assert(s.insert("a")==0);  //insert with no pos
+   assert(s.insert("a")==0);  //duplicate insert no pos
+
+
+assert(s.erase(0)); erase beginning
+
+
+
+
+    assert(s.erase(4));  //erase at end
+    assert(s.erase(1));   //erase middle
+    
+    
+    
+    assert(s.find("ss")== -1);  //find non valid
+    assert(s.find("s") == 2);    //find valid
+    
+   
+assert(s.insert("a")==0);  
+    assert(s.insert("a")==0);  
+    s.dump();
+    assert(s.remove("a")==3);  //multiple removal
+
+
+    assert(s.remove("s")==1);   single remove
+    assert(s.remove("233")==1); single remove
+    
+    std::string x = "ten";
+    assert(s.get(0,x) && x == "33");  //get at beginning
+assert(s.get(1,x) && x == "a");  //get at middle
+assert(s.get(2,x) && x == "5");  //get at the end
+
+
+Sequence s8;
+    s8.insert(0, "paratha");
+    s8.insert(0, "focaccia");
+    Sequence s9;
+    s9.insert(0, "roti");
+    s8.swap(s9);
+    assert(s8.size() == 1  &&  s8.find("roti") == 0  &&  s9.size() == 2  &&
+    s9.find("focaccia") == 0  &&  s9.find("paratha") == 1);   //testing swap function, see if everything swaps
+    
+    Sequence s1;
+    Sequence s2;
+    
+    s1.insert("a");
+    s1.insert("a");
+    s1.insert("a");
+    s1.insert("b");
+    s1.insert(3,"c");
+    s1.insert("b");
+    s1.insert("x");
+    s1.insert("x");
+    
+    s2.insert("b");
+    s2.insert("b");
+    s2.insert(1,"c");
+    
+    
+    s1.dump();
+    s2.dump();
+    
+    
+    
+    std::cerr<<subsequence(s1, s2)<<std::endl; //valid subsequence
+    std::cerr<<subsequence(s2, s1)<<std::endl;  //subsequence is bigger than main sequence
+
+
+    s2.insert("a");
+    
+    s2.dump();
+    std::cerr<<subsequence(s1, s2)<<std::endl;  //testing with a longer subsequence
+    
+    s2.insert("dd");  
+  
+    s2.dump();
+    std::cerr<<subsequence(s1, s2)<<std::endl;  //not a valid sequence
+
+
+
+
+
+
+    
+    Sequence s3;
+    Sequence s4;
+    Sequence s5;
+    
+    for(int i = 0; i<8;i++){
+        s3.insert("a");
+    }
+    for(int i = 0; i<2;i++){
+        s4.insert("b");
+    }
+    interleave(s3, s4, s5 );  //first bigger than second
+    s5.dump(); 
+     interleave(s4, s3, s5 );  //second bigger than first
+     s5.dump();
+     interleave(s4, s3, s3 );  //check aliasing
+     s3.dump();
