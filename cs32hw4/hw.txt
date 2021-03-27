@@ -1,0 +1,20 @@
+﻿Darren Wu
+CS 32 HW 4
+
+
+2. The  way the one parameter version of the insert function works is that it compares elements in the Sequence to determine the proper place to insert using “value > p->m_value”. This operator is not defined in the coord class which results in an error.
+
+
+4b. If you only had one parameter, you would not be able to save the previous path of files. For example, /Fun would not be able to know that it came from /My Pictures
+
+
+5a. The time complexity of this algorithm is O(N^3). The algorithm uses a triple nested loop. The inner most loop which is O(N) is called O(N) times by the middle loop which is also called O(N) times by the outermost loop.
+
+
+5b. The time complexity of the algorithm is also O(N^3) since i’s max number is also N, making j run up to N times. The algorithm is still faster due to lower order terms, but in Big O notation, it is the same as the first algorithm.
+
+
+6a. The time complexity is O(N^2) since the outer loop runs N times, while both get and insert call the helper function nodeAtPos which is also another loop going at max N/2 times for each function. Since the constants can be dropped for time complexity, and the outer loop going up to N times calls the inner loop going up to N times multiplied by a constant, the time complexity is O(N^2)
+
+
+6b. The time complexity of this algorithm is O(N). This algorithm uses the insertBefore function which runs in constant time as there are no loops and is not dependent on the size of N. The only thing dependent on the size of N are the two outer for loops. Since the constants can be dropped, the time complexity is O(N).
