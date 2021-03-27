@@ -1,0 +1,38 @@
+﻿2. Given the algorithm, main function, and maze shown at the end of problem 1, what are the first 12 (r,c) coordinates popped off the stack by the algorithm?
+
+
+1. (6,4)
+2. (6,3)
+3. (6,5)
+4. (7,5)
+5. (8,5)
+6. (8,6)
+7. (8,7)
+8. (8,8)
+9. (7,8)
+10. (6,6)
+11. (5,4)
+12. (4,4)
+
+
+4.  Given the same main function and maze as are shown at the end of problem 1, what are the first 12 (r,c) coordinates popped from the queue in your queue-based algorithm?
+
+
+1. (6,4)
+2. (5,4)
+3. (6,5)
+4. (6,3)
+5. (4,4)
+6. (6,6)
+7. (7,5)
+8. (3,4)
+9. (4,5)
+10. (8,5)
+11. (2,4)
+12. (4,6)
+
+
+The two implementations differ in that stacks use a first in last out approach versus the queues and the first in first out approach. This means that for stacks, it runs through the maze more like an actual human who would run through a maze. Since the last pushed coordinate is the first one out, that means it will never jump around  (unless a deadend) in trying to find the end to a maze. It will always move to adjacent coordinates in the maze, either heading towards deadends or the correct end point. If it reaches a dead end, it jumps back to the previously saved coordinate and proceeds until it finds the end point or the stack runs out.
+
+
+The queue however uses the first in first out approach. The result of this is that it checks for the end of the maze in a ripple like effect. Since each new coordinate is set to the end of the queue, it has to wait in a line of all the previous coordinates that were pushed on, causing the implementation to jump around throughout the valid points of the maze. If a coordinate has multiple adjacent coordinates, then it will visit all the closer coordinates before slowly rippling outwards, eventually finding the end, or emptying the queue.
